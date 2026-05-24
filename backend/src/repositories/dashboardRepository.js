@@ -19,13 +19,56 @@ async function getDashboardSummaryFromDB() {
     .sort({ collectedAt: -1 })
     .lean();
 
+  const recentLogs = await CollectionLog.find()
+    .sort({ collectedAt: -1 })
+    .limit(100)
+    .lean();
+
+  const recentSuccessCount = recentLogs.filter(
+    (log) => log.status === "success"
+  ).length;
+
+  const recentFailedCount = recentLogs.filter(
+    (log) => log.status === "failed"
+  ).length;
+
+  const recentSuccessRate =
+    recentLogs.length > 0
+      ? Math.round((recentSuccessCount / recentLogs.length) * 1000) / 10
+      : 0;
+
+  const logsWithResponseTime = recentLogs.filter(
+    (log) => typeof log.responseTimeMs === "number"
+  );
+
+  const averageResponseTimeMs =
+    logsWithResponseTime.length > 0
+      ? Math.round(
+          logsWithResponseTime.reduce(
+            (sum, log) => sum + log.responseTimeMs,
+            0
+          ) / logsWithResponseTime.length
+        )
+      : 0;
+
+  const latestSuccessLog = await CollectionLog.findOne({
+    status: "success"
+  })
+    .sort({ collectedAt: -1 })
+    .lean();
+
   return {
     totalPlaceMetrics,
     totalStationArrivals,
     totalLogs,
     successLogs,
     failedLogs,
-    latestCollectedAt: latestLog?.collectedAt || null
+    latestCollectedAt: latestLog?.collectedAt || null,
+
+    recentSuccessRate,
+    averageResponseTimeMs,
+    recentFailedCount,
+    latestSuccessAt: latestSuccessLog?.collectedAt || null
   };
 }
 
