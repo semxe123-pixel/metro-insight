@@ -14,6 +14,21 @@
 
 ---
 
+## Highlights
+
+- 서울시 공공 API 기반 도시·교통 데이터 자동 수집
+- MongoDB Atlas에 도시데이터, 지하철 도착정보, 수집 로그, 수집 대상 정보를 분리 저장
+- 관리자 화면에서 수집 대상 추가·비활성화·삭제 및 수동 수집 실행 가능
+- 최근 100회 수집 성공률, 평균 응답 시간, 실패 로그를 대시보드에서 모니터링
+- 수집 시각과 남은 도착 시간을 기준으로 지하철 도착정보 신선도 필터 적용
+- Controller-Service-Repository 구조로 백엔드 책임 분리
+- React 컴포넌트 분리로 대시보드 UI 유지보수성 개선
+- Vercel, Render, MongoDB Atlas 기반 풀스택 배포 완료
+
+> 현재 프로젝트는 포트폴리오 구현 범위상 관리자 인증은 생략했으며, 실제 운영 환경에서는 수동 수집 실행과 수집 대상 관리 기능에 인증/권한 검증이 필요합니다.
+
+---
+
 ## Preview
 
 ### Dashboard Overview
@@ -54,7 +69,7 @@ MetroInsight는 이 문제의식에서 출발했습니다.
 
 ## Architecture
 
-
+![Architecture](./docs/images/architecture.png)
 ```txt
 서울시 공공 API
   ├─ 서울 실시간 도시데이터 API
