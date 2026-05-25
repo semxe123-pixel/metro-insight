@@ -50,6 +50,7 @@
 ![Collection Target and Logs](./docs/images/admin-logs.png)
 
 ---
+
 ## Why I Built This
 
 공공 API를 활용한 프로젝트는 보통 데이터를 가져와서 화면에 보여주는 데서 끝나는 경우가 많습니다.  
@@ -70,6 +71,7 @@ MetroInsight는 이 문제의식에서 출발했습니다.
 ## Architecture
 
 ![Architecture](./docs/images/architecture.png)
+
 ```txt
 서울시 공공 API
   ├─ 서울 실시간 도시데이터 API
@@ -246,6 +248,7 @@ React 대시보드에서 Recharts를 활용해 두 가지 차트를 구현했습
 운영자가 데이터 흐름과 수집 상태를 빠르게 확인할 수 있도록 구성했습니다.
 
 ---
+
 ## Data Flow
 
 ```txt
